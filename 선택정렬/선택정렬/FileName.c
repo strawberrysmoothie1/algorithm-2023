@@ -49,7 +49,7 @@ int main() {
     printf("입력할 숫자 개수: ");
     scanf("%d", &n);
 
-    printf("선택할 k번째로 숫자");
+    printf("선택할 k번째로 숫자: ");
     scanf("%d", &k);
     if (k > n) {
         printf("잘못된 입력");
