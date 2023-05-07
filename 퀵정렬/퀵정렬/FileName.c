@@ -35,25 +35,35 @@ int main() {
     int n = 0;
     int num[100];
 
-    printf("입력할 숫자 개수: ");
-    scanf("%d", &n);
+    FILE* input, * output; // 입력 파일 포인터, 출력 파일 포인터
 
-    for (int i = 0; i < n; i++) {
-        printf("숫자 입력: ");
-        scanf("%d", &num[i]);
+    input = fopen("data.txt", "r"); // data.txt 파일을 읽기 모드로 열기
+    output = fopen("result.txt", "w"); // result.txt 파일을 쓰기 모드로 열기
+
+    if (input == NULL) { // 파일 열기에 실패한 경우
+        printf("파일 열기 실패");
+        return 0;
     }
 
-    printf("입력한 숫자: ");
+    fscanf(input, "%d", &n); // 파일에서 숫자 개수 입력받기
     for (int i = 0; i < n; i++) {
-        printf("%d ", num[i]);
+        fscanf(input, "%d", &num[i]); // 파일에서 숫자 입력받기
     }
 
-    Quick(num, n);
-
-    printf("\n정렬된 숫자: ");
+    fprintf(output, "입력한 숫자: ");
     for (int i = 0; i < n; i++) {
-        printf("%d ", num[i]);
+        fprintf(output, "%d ", num[i]); // 입력한 숫자 출력
     }
+
+    Quick(num, n); // 퀵 정렬 실행
+
+    fprintf(output, "\n정렬된 숫자: ");
+    for (int i = 0; i < n; i++) {
+        fprintf(output, "%d ", num[i]); // 정렬된 숫자 출력
+    }
+
+    fclose(input); // 파일 닫기
+    fclose(output);
 
     return 0;
 }
